@@ -12,27 +12,22 @@ services:
       labels:
         - "traefik.enable=true"
 
-        # HTTP → HTTPS
         - "traefik.http.routers.benalcazar.entrypoints=http"
-        - "traefik.http.routers.benalcazar.rule=Host(benalcazar.byronrm.com)"
+        - "traefik.http.routers.benalcazar.rule=Host(`benalcazar.byronrm.com`)"
         - "traefik.http.middlewares.benalcazar-https-redirect.redirectscheme.scheme=https"
         - "traefik.http.routers.benalcazar.middlewares=benalcazar-https-redirect"
 
-        # HTTPS
         - "traefik.http.routers.benalcazar-secure.entrypoints=https"
-        - "traefik.http.routers.benalcazar-secure.rule=Host(benalcazar.byronrm.com)"
+        - "traefik.http.routers.benalcazar-secure.rule=Host(`benalcazar.byronrm.com`)"
         - "traefik.http.routers.benalcazar-secure.tls=true"
         - "traefik.http.routers.benalcazar-secure.tls.certresolver=http"
         - "traefik.http.routers.benalcazar-secure.service=benalcazar"
 
-        # Puerto interno
         - "traefik.http.services.benalcazar.loadbalancer.server.port=8000"
-
-        # Red pública de Traefik
         - "traefik.docker.network=traefik-public"
 
-    networks:
-      - traefik-public   # ← ESTO VA AQU
+      networks:
+        - traefik-public
 
 networks:
   traefik-public:
