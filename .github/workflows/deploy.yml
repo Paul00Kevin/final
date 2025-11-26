@@ -35,7 +35,7 @@ jobs:
       with:
         push: true
         no-cache: true
-        tags: ghcr.io/paul00kevin/quinto_a_final:1.0.1
+        tags: ghcr.io/paul00kevin/benalcazar_kev:1.0.1
 
     - name: 🧾 Mostrar variables básicas
       run: |
@@ -74,7 +74,7 @@ jobs:
         script: |
           cd ~/despliegue
           echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u paul00kevin --password-stdin
-          docker pull ghcr.io/paul00kevin/quinto_a_final:1.0.1
+          docker pull ghcr.io/paul00kevin/benalcazar_kev:1.0.1
           
           docker stack rm kevin || true
           sleep 20
